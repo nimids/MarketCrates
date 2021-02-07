@@ -10,7 +10,7 @@ Yes you heard it! Some crates to spice up your towns, markets, fishing docs, you
 - You can put a stick under it to give the crate in incline
 
 Shift click the crate to place stack crates in the same block space.  
-Hit the crate with a stick to incline the crate. Hit it once with an axe to retreive the stick (For creative mode right clicking with a stick toggles it)  
+Hit the crate with a stick to incline the crate. Hit it once with an axe to retrieve the stick (For creative mode right clicking with a stick toggles it)  
 
 ![](images/crafting.png)  
 *Replace with proper wood types to craft the different crates*
