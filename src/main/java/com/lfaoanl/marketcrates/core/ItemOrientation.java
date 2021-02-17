@@ -1,5 +1,6 @@
 package com.lfaoanl.marketcrates.core;
 
+import com.lfaoanl.marketcrates.MarketCrates;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -8,6 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
 
 import java.util.Random;
 import java.util.function.Consumer;
@@ -22,7 +26,9 @@ public class ItemOrientation {
 
     public static final ItemOrientation EMPTY = new ItemOrientation(ItemStack.EMPTY);
 
-    private static final Quaternion HORIZONTAL = new Quaternion(85, 0, 0, true);
+    private static Quaternion HORIZONTAL;
+
+    private boolean hasOrientations = false;
 
     @SuppressWarnings("unchecked")
     private static final Consumer<MatrixStack>[] cratePositions = new Consumer[]{
@@ -40,11 +46,25 @@ public class ItemOrientation {
         this.itemStack = itemStack;
         height = 0.1f;
 
+        DistExecutor.runWhenOn(Dist.CLIENT, this::generateOrientations);
+    }
+
+    public Runnable generateOrientations() {
+        if (hasOrientations) {
+            return () -> {};
+        }
+
         int lowIncline = -10;
         int incline = 25;
         rotation[0] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
         rotation[1] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
         rotation[2] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
+
+        HORIZONTAL = new Quaternion(85, 0, 0, true);
+
+        hasOrientations = true;
+
+        return () -> {};
     }
 
     public static NonNullList<ItemOrientation> toItemOrientation(NonNullList<ItemStack> stacks) {
