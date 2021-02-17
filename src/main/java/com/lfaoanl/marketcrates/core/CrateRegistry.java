@@ -1,15 +1,13 @@
 package com.lfaoanl.marketcrates.core;
 
 import com.lfaoanl.marketcrates.References;
-import com.lfaoanl.marketcrates.gui.BaseCrateContainer;
-import com.lfaoanl.marketcrates.gui.CrateContainer;
 import com.lfaoanl.marketcrates.blocks.CrateBlock;
+import com.lfaoanl.marketcrates.gui.CrateContainer;
 import com.lfaoanl.marketcrates.gui.CrateDoubleContainer;
 import com.lfaoanl.marketcrates.items.CrateItem;
 import com.lfaoanl.marketcrates.tileentities.CrateTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntityType;
@@ -19,7 +17,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CrateRegistry {

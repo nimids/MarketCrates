@@ -14,7 +14,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -25,7 +24,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class CrateTileEntity extends LockableTileEntity implements IForgeTileEntity {
 
-//    private NonNullList<ItemStack> stacks = NonNullList.withSize(6, ItemStack.EMPTY);
+    //    private NonNullList<ItemStack> stacks = NonNullList.withSize(6, ItemStack.EMPTY);
     private NonNullList<ItemOrientation> stacks = NonNullList.withSize(12, ItemOrientation.EMPTY);
 
     private boolean isDouble = false;
@@ -102,7 +101,7 @@ public class CrateTileEntity extends LockableTileEntity implements IForgeTileEnt
     @Override
     public int getSizeInventory() {
 //        if (isDoubleCrate()) {
-            return 12;
+        return 12;
 //        }
 //        return 6;
     }

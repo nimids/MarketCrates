@@ -18,7 +18,7 @@ public class MarketCrates {
     // Directly reference a log4j logger.
 //    public static final Logger LOGGER = LogManager.getLogger(References.MODID);
     public static MarketCrates INSTANCE;
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 

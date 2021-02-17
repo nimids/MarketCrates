@@ -4,7 +4,6 @@ import com.lfaoanl.marketcrates.MarketCrates;
 import com.lfaoanl.marketcrates.References;
 import com.lfaoanl.marketcrates.network.packets.CrateItemsPacket;
 import com.lfaoanl.marketcrates.tileentities.CrateTileEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

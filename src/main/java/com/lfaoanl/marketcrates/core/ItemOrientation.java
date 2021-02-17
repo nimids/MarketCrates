@@ -1,6 +1,5 @@
 package com.lfaoanl.marketcrates.core;
 
-import com.lfaoanl.marketcrates.MarketCrates;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -10,7 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 
 import java.util.Random;
@@ -51,7 +49,8 @@ public class ItemOrientation {
 
     public Runnable generateOrientations() {
         if (hasOrientations) {
-            return () -> {};
+            return () -> {
+            };
         }
 
         int lowIncline = -10;
@@ -64,7 +63,8 @@ public class ItemOrientation {
 
         hasOrientations = true;
 
-        return () -> {};
+        return () -> {
+        };
     }
 
     public static NonNullList<ItemOrientation> toItemOrientation(NonNullList<ItemStack> stacks) {
