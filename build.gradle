@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = 'v1.0-universal'
+version = 'v1.1-universal'
 group = 'com.lfaoanl.marketcrates' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'MarketCrates-1.16.4-35.1.4'
 
