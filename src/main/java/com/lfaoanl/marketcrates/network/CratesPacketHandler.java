@@ -1,5 +1,6 @@
 package com.lfaoanl.marketcrates.network;
 
+import com.lfaoanl.marketcrates.MarketCrates;
 import com.lfaoanl.marketcrates.References;
 import com.lfaoanl.marketcrates.network.packets.CrateItemsPacket;
 import com.lfaoanl.marketcrates.tileentities.CrateTileEntity;
@@ -32,7 +33,7 @@ public class CratesPacketHandler {
     public static void handle(final CrateItemsPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
 
-            World world = Minecraft.getInstance().world;
+            World world = MarketCrates.proxy.getWorld();
 
             if (world != null) {
                 TileEntity tile = world.getTileEntity(msg.getPosition());

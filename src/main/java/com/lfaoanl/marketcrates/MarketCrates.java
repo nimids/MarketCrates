@@ -1,26 +1,15 @@
 package com.lfaoanl.marketcrates;
 
-import com.lfaoanl.marketcrates.core.Client;
+import com.lfaoanl.marketcrates.core.ClientProxy;
+import com.lfaoanl.marketcrates.core.CommonProxy;
 import com.lfaoanl.marketcrates.core.CrateRegistry;
 import com.lfaoanl.marketcrates.data.CrateDataGenerator;
 import com.lfaoanl.marketcrates.network.CratesPacketHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(References.MODID)
@@ -29,7 +18,9 @@ public class MarketCrates {
     // Directly reference a log4j logger.
 //    public static final Logger LOGGER = LogManager.getLogger(References.MODID);
     public static MarketCrates INSTANCE;
+    private static final boolean DEBUG = true;
 
+    public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public MarketCrates() {
 
@@ -38,11 +29,32 @@ public class MarketCrates {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
+        log("Init CrateRegistry");
         CrateRegistry.init();
+        log("Done initialising CrateRegistry");
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Client::init);
+        log("ClientOnly registry");
+        DistExecutor.runWhenOn(Dist.CLIENT, MarketCrates::clientInit);
+        log("Done! - ClientOnly registry");
+
+        log("Init CratePacketHandler");
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CratesPacketHandler::init);
+        log("Done! - Init CratePacketHandler");
+
+        log("Init CrateDataGenerator");
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CrateDataGenerator::init);
+        log("Init CrateDataGenerator");
+    }
+
+    private void log(String message) {
+        if (!DEBUG) {
+            return;
+        }
+        System.out.println(message);
+    }
+
+    private static Runnable clientInit() {
+        return () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::init);
     }
 
 
