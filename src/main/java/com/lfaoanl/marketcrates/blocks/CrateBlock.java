@@ -10,12 +10,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -67,7 +67,7 @@ public class CrateBlock extends Block implements IWaterLoggable {
         builder.add(WATERLOGGED);
     }
 
-    public FluidState getFluidState(BlockState state) {
+    public IFluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
@@ -104,7 +104,7 @@ public class CrateBlock extends Block implements IWaterLoggable {
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        IFluidState fluidstate = context.getWorld().getFluidState(context.getPos());
         boolean isWaterLogged = fluidstate.getFluid() == Fluids.WATER;
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, isWaterLogged);
     }
@@ -126,11 +126,6 @@ public class CrateBlock extends Block implements IWaterLoggable {
 
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-    }
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        return super.getDrops(state, builder);
     }
 
     @Override

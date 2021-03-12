@@ -35,7 +35,7 @@ public enum CrateType implements IStringSerializable {
     }
 
     @Override
-    public String getString() {
+    public String getName() {
         return this.name;
     }
 
@@ -62,4 +62,5 @@ public enum CrateType implements IStringSerializable {
     public static CrateType[] all() {
         return new CrateType[]{DEFAULT, DOUBLE, INCLINED};
     }
+
 }

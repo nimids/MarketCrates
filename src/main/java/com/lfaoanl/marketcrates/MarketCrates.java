@@ -3,7 +3,6 @@ package com.lfaoanl.marketcrates;
 import com.lfaoanl.marketcrates.core.ClientProxy;
 import com.lfaoanl.marketcrates.core.CommonProxy;
 import com.lfaoanl.marketcrates.core.CrateRegistry;
-import com.lfaoanl.marketcrates.data.CrateDataGenerator;
 import com.lfaoanl.marketcrates.network.CratesPacketHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,9 +40,6 @@ public class MarketCrates {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CratesPacketHandler::init);
         log("Done! - Init CratePacketHandler");
 
-        log("Init CrateDataGenerator");
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CrateDataGenerator::init);
-        log("Init CrateDataGenerator");
     }
 
     private void log(String message) {

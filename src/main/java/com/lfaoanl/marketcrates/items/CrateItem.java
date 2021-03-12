@@ -43,7 +43,10 @@ public class CrateItem extends BlockItem {
                 }
 
                 // SUCCES when client && COSNUME when server
-                return ActionResultType.func_233537_a_(world.isRemote());
+                if (world.isRemote())  {
+                    return ActionResultType.SUCCESS;
+                }
+                return ActionResultType.CONSUME;
             }
         }
 

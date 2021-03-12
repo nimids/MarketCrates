@@ -118,8 +118,8 @@ public class CrateTileEntity extends LockableTileEntity implements IForgeTileEnt
         this.getItems().clear();
     }
 
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void read(CompoundNBT nbt) {
+        super.read(nbt);
 
         this.stacks = loadFromNbt(nbt);
     }
@@ -159,8 +159,8 @@ public class CrateTileEntity extends LockableTileEntity implements IForgeTileEnt
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
-        super.handleUpdateTag(state, tag);
+    public void handleUpdateTag(CompoundNBT tag) {
+        super.handleUpdateTag(tag);
 
         stacks = loadFromNbt(tag);
     }
