@@ -1,9 +1,9 @@
 package com.lfaoanl.marketcrates.network.packets;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
 
 public class CrateItemsPacket {
 
@@ -15,7 +15,7 @@ public class CrateItemsPacket {
         this.position = position;
     }
 
-    public static void encode(CrateItemsPacket msg, PacketBuffer buf) {
+    public static void encode(CrateItemsPacket msg, FriendlyByteBuf buf) {
         buf.writeInt(msg.position.getX());
         buf.writeInt(msg.position.getY());
         buf.writeInt(msg.position.getZ());
@@ -23,7 +23,7 @@ public class CrateItemsPacket {
         buf.writeInt(msg.items.size());
 
         for (ItemStack stack : msg.items) {
-            buf.writeItemStack(stack);
+            buf.writeItem(stack);
         }
     }
 
@@ -31,7 +31,7 @@ public class CrateItemsPacket {
         return position;
     }
 
-    public static CrateItemsPacket decode(PacketBuffer buf) {
+    public static CrateItemsPacket decode(FriendlyByteBuf buf) {
         int x = buf.readInt();
         int y = buf.readInt();
         int z = buf.readInt();
@@ -41,7 +41,7 @@ public class CrateItemsPacket {
         NonNullList<ItemStack> items = NonNullList.withSize(size, ItemStack.EMPTY);
 
         for (int i = 0; i < size; i++) {
-            ItemStack itemStack = buf.readItemStack();
+            ItemStack itemStack = buf.readItem();
             items.set(i, itemStack);
         }
 

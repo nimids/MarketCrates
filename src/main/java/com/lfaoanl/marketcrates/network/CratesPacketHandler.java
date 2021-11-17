@@ -4,13 +4,13 @@ import com.lfaoanl.marketcrates.MarketCrates;
 import com.lfaoanl.marketcrates.References;
 import com.lfaoanl.marketcrates.network.packets.CrateItemsPacket;
 import com.lfaoanl.marketcrates.tileentities.CrateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkRegistry;
+import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 
 import java.util.function.Supplier;
 
@@ -32,10 +32,10 @@ public class CratesPacketHandler {
     public static void handle(final CrateItemsPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
 
-            World world = MarketCrates.proxy.getWorld();
+            Level world = MarketCrates.proxy.getWorld();
 
             if (world != null) {
-                TileEntity tile = world.getTileEntity(msg.getPosition());
+                BlockEntity tile = world.getBlockEntity(msg.getPosition());
 
                 if (tile instanceof CrateTileEntity) {
                     ((CrateTileEntity) tile).receiveContents(msg.items);

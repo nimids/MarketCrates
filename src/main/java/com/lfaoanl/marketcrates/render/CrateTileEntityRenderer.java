@@ -4,53 +4,44 @@ import com.lfaoanl.marketcrates.blocks.CrateBlock;
 import com.lfaoanl.marketcrates.blocks.states.CrateType;
 import com.lfaoanl.marketcrates.core.ItemOrientation;
 import com.lfaoanl.marketcrates.tileentities.CrateTileEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.vector.Quaternion;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.function.Function;
-
 @OnlyIn(Dist.CLIENT)
-public class CrateTileEntityRenderer<T extends TileEntity> extends TileEntityRenderer<T> implements Function<TileEntityRendererDispatcher, CrateTileEntityRenderer> {
+public class CrateTileEntityRenderer implements BlockEntityRenderer<CrateTileEntity> {
 
     private final Quaternion SOUTH = new Quaternion(0, 180, 0, true);
     private final Quaternion EAST = new Quaternion(0, 270, 0, true);
     private final Quaternion WEST = new Quaternion(0, 90, 0, true);
     private final Quaternion INCLINED = new Quaternion(-22.5f, 0, 0, true);
 
-
-    public CrateTileEntityRenderer() {
-        this(TileEntityRendererDispatcher.instance);
-    }
-
-    public CrateTileEntityRenderer(TileEntityRendererDispatcher dispatcher) {
-        super(dispatcher);
+    public CrateTileEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
-    public void render(T tileEntity, float partialTicks, MatrixStack matrix, IRenderTypeBuffer buffer, int light, int overlay) {
-        matrix.push();
+    public void render(CrateTileEntity tileEntity, float partialTicks, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+        matrix.pushPose();
 
         BlockState blockState = tileEntity.getBlockState();
 
         applyDirection(matrix, blockState);
 
-        if (blockState.get(CrateBlock.TYPE) == CrateType.INCLINED) {
-            matrix.rotate(INCLINED);
+        if (blockState.getValue(CrateBlock.TYPE) == CrateType.INCLINED) {
+            matrix.mulPose(INCLINED);
             matrix.translate(0, 0, 0.12);
         } else {
             matrix.translate(0, 0.1f, 0);
         }
 
-        CrateTileEntity crateTE = (CrateTileEntity) tileEntity;
+        CrateTileEntity crateTE = tileEntity;
         NonNullList<ItemOrientation> items = crateTE.getItems();
         for (int i = 0; i < 6; i++) {
 
@@ -58,7 +49,7 @@ public class CrateTileEntityRenderer<T extends TileEntity> extends TileEntityRen
         }
 
         if (crateTE.isDoubleCrate()) {
-            matrix.push();
+            matrix.pushPose();
 
             matrix.translate(0, 0.5, 0);
 
@@ -67,27 +58,23 @@ public class CrateTileEntityRenderer<T extends TileEntity> extends TileEntityRen
                 items.get(i + 6).render(i, matrix, buffer, light, overlay);
             }
 
-            matrix.pop();
+            matrix.popPose();
         }
 
-        matrix.pop();
+        matrix.popPose();
     }
 
-    private void applyDirection(MatrixStack matrix, BlockState blockState) {
-        if (blockState.get(CrateBlock.FACING) == Direction.SOUTH) {
+    private void applyDirection(PoseStack matrix, BlockState blockState) {
+        if (blockState.getValue(CrateBlock.FACING) == Direction.SOUTH) {
             matrix.translate(1, 0, 1);
-            matrix.rotate(SOUTH);
-        } else if (blockState.get(CrateBlock.FACING) == Direction.EAST) {
-            matrix.rotate(EAST);
+            matrix.mulPose(SOUTH);
+        } else if (blockState.getValue(CrateBlock.FACING) == Direction.EAST) {
+            matrix.mulPose(EAST);
             matrix.translate(0, 0, -1);
-        } else if (blockState.get(CrateBlock.FACING) == Direction.WEST) {
-            matrix.rotate(WEST);
+        } else if (blockState.getValue(CrateBlock.FACING) == Direction.WEST) {
+            matrix.mulPose(WEST);
             matrix.translate(-1, 0, 0);
         }
     }
 
-    @Override
-    public CrateTileEntityRenderer apply(TileEntityRendererDispatcher tileEntityRendererDispatcher) {
-        return new CrateTileEntityRenderer(tileEntityRendererDispatcher);
-    }
 }

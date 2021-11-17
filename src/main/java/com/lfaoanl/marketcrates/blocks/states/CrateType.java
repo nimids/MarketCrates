@@ -1,14 +1,13 @@
 package com.lfaoanl.marketcrates.blocks.states;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public enum CrateType implements IStringSerializable {
+public enum CrateType implements StringRepresentable {
 
     DEFAULT("default", 8d, false),
     INCLINED("inclined", 14d, true),
@@ -16,7 +15,7 @@ public enum CrateType implements IStringSerializable {
 
     private final String name;
     private final double height;
-    private final boolean resoueceName;
+    private final boolean resourceName;
 
     /*
     shapes.put("default", Block.makeCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, 8.0D, 16.0D));
@@ -27,7 +26,7 @@ public enum CrateType implements IStringSerializable {
     CrateType(String name, double height, boolean resourceName) {
         this.name = name;
         this.height = height;
-        this.resoueceName = resourceName;
+        this.resourceName = resourceName;
     }
 
     public static Collection<CrateType> allValues() {
@@ -35,15 +34,15 @@ public enum CrateType implements IStringSerializable {
     }
 
     @Override
-    public String getString() {
+    public String getSerializedName() {
         return this.name;
     }
 
     public VoxelShape getShape(boolean horizontal) {
         if (horizontal) {
-            return Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 16.0D, height, 14.0D);
+            return Block.box(0.0D, 0.0D, 2.0D, 16.0D, height, 14.0D);
         }
-        return Block.makeCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, height, 16.0D);
+        return Block.box(2.0D, 0.0D, 0.0D, 14.0D, height, 16.0D);
     }
 
     public boolean isDouble() {
@@ -56,7 +55,7 @@ public enum CrateType implements IStringSerializable {
 
     public String getResource() {
 
-        return "crate" + (resoueceName ? "_" + this.name : "");
+        return "crate" + (resourceName ? "_" + this.name : "");
     }
 
     public static CrateType[] all() {

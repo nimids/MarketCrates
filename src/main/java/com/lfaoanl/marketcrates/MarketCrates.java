@@ -6,7 +6,10 @@ import com.lfaoanl.marketcrates.core.CrateRegistry;
 import com.lfaoanl.marketcrates.data.CrateDataGenerator;
 import com.lfaoanl.marketcrates.network.CratesPacketHandler;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -18,7 +21,7 @@ public class MarketCrates {
     // Directly reference a log4j logger.
 //    public static final Logger LOGGER = LogManager.getLogger(References.MODID);
     public static MarketCrates INSTANCE;
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
@@ -28,6 +31,7 @@ public class MarketCrates {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         log("Init CrateRegistry");
         CrateRegistry.init();
@@ -35,14 +39,15 @@ public class MarketCrates {
 
         log("ClientOnly registry");
         DistExecutor.runWhenOn(Dist.CLIENT, MarketCrates::clientInit);
+        modEventBus.addListener(proxy::registerBlockEntityRenderer);
         log("Done! - ClientOnly registry");
 
         log("Init CratePacketHandler");
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CratesPacketHandler::init);
+        modEventBus.addListener(CratesPacketHandler::init);
         log("Done! - Init CratePacketHandler");
 
         log("Init CrateDataGenerator");
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CrateDataGenerator::init);
+        modEventBus.addListener(CrateDataGenerator::init);
         log("Init CrateDataGenerator");
     }
 

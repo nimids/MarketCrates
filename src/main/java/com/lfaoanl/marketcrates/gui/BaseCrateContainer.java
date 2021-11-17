@@ -1,35 +1,34 @@
 package com.lfaoanl.marketcrates.gui;
 
 import com.lfaoanl.marketcrates.core.CrateRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-public abstract class BaseCrateContainer extends Container {
+public abstract class BaseCrateContainer extends AbstractContainerMenu {
 
 
-    protected final IInventory inventory;
+    protected final Container inventory;
     private final int size;
 
-    public BaseCrateContainer(int id, PlayerInventory playerInventory, IInventory inventory, int size, ContainerType<?extends BaseCrateContainer> containerType) {
+    public BaseCrateContainer(int id, Inventory playerInventory, Container inventory, int size, MenuType<?extends BaseCrateContainer> containerType) {
         super(containerType, id);
 
         this.size = size;
 
-        assertInventorySize(inventory, size);
+        checkContainerSize(inventory, size);
         this.inventory = inventory;
-        inventory.openInventory(playerInventory.player);
+        inventory.startOpen(playerInventory.player);
 
         drawUserInventory(playerInventory);
 
     }
 
-    private void drawUserInventory(PlayerInventory playerInventory) {
+    private void drawUserInventory(Inventory playerInventory) {
         // Player inventory
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
@@ -46,45 +45,45 @@ public abstract class BaseCrateContainer extends Container {
     /**
      * Determines whether supplied player can use this container
      */
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.inventory.isUsableByPlayer(playerIn);
+    public boolean stillValid(Player playerIn) {
+        return this.inventory.stillValid(playerIn);
     }
 
     /**
      * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player
      * inventory and the other inventory(s).
      */
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int slotIndex) {
+    public ItemStack quickMoveStack(Player playerIn, int slotIndex) {
 
         // Init empty itemstack
         ItemStack copyStack = ItemStack.EMPTY;
 
         // Get significant slot
-        Slot slot = this.inventorySlots.get(slotIndex);
+        Slot slot = this.slots.get(slotIndex);
 
         // If slot has stuff
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.hasItem()) {
 
             // Get stuff from slot
-            ItemStack stackFromSlot = slot.getStack();
+            ItemStack stackFromSlot = slot.getItem();
             copyStack = stackFromSlot.copy();
 
 
-            int playerInventorySize = this.inventorySlots.size() - size;
+            int playerInventorySize = this.slots.size() - size;
             if (slotIndex >= playerInventorySize) {
 
                 // If slot is changed
-                if (!this.mergeItemStack(stackFromSlot, 0, playerInventorySize, true)) {
+                if (!this.moveItemStackTo(stackFromSlot, 0, playerInventorySize, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(stackFromSlot, playerInventorySize, this.inventorySlots.size(), false)) {
+            } else if (!this.moveItemStackTo(stackFromSlot, playerInventorySize, this.slots.size(), false)) {
                 return ItemStack.EMPTY;
             }
 
             if (stackFromSlot.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (stackFromSlot.getCount() == copyStack.getCount()) {
@@ -100,9 +99,9 @@ public abstract class BaseCrateContainer extends Container {
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
-        this.inventory.closeInventory(playerIn);
+    public void removed(Player playerIn) {
+        super.removed(playerIn);
+        this.inventory.stopOpen(playerIn);
     }
 
 }

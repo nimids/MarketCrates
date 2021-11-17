@@ -1,13 +1,13 @@
 package com.lfaoanl.marketcrates.core;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.NonNullList;
+import com.mojang.math.Quaternion;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
@@ -29,15 +29,15 @@ public class ItemOrientation {
     private boolean hasOrientations = false;
 
     @SuppressWarnings("unchecked")
-    private static final Consumer<MatrixStack>[] cratePositions = new Consumer[]{
-            (Object m) -> ((MatrixStack) m).translate(0.6, 0.1, 0.65), // Upper Left
-            (Object m) -> ((MatrixStack) m).translate(0.6, 0.1, 0.4), // Middle left
+    private static final Consumer<PoseStack>[] cratePositions = new Consumer[]{
+            (Object m) -> ((PoseStack) m).translate(0.6, 0.1, 0.65), // Upper Left
+            (Object m) -> ((PoseStack) m).translate(0.6, 0.1, 0.4), // Middle left
 
-            (Object m) -> ((MatrixStack) m).translate(0.6, 0.1, 0.12), // Lower left
-            (Object m) -> ((MatrixStack) m).translate(0.4, 0.1, 0.65), // Upper right
+            (Object m) -> ((PoseStack) m).translate(0.6, 0.1, 0.12), // Lower left
+            (Object m) -> ((PoseStack) m).translate(0.4, 0.1, 0.65), // Upper right
 
-            (Object m) -> ((MatrixStack) m).translate(0.4, 0.1, 0.4), // Middle right
-            (Object m) -> ((MatrixStack) m).translate(0.4, 0.1, 0.12) // Lower right
+            (Object m) -> ((PoseStack) m).translate(0.4, 0.1, 0.4), // Middle right
+            (Object m) -> ((PoseStack) m).translate(0.4, 0.1, 0.12) // Lower right
     };
 
     public ItemOrientation(ItemStack itemStack) {
@@ -91,8 +91,8 @@ public class ItemOrientation {
         return new Random().nextInt(max - min) + min;
     }
 
-    public void render(int index, MatrixStack matrix, IRenderTypeBuffer buffer, int light, int overlay) {
-        matrix.push();
+    public void render(int index, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+        matrix.pushPose();
         cratePositions[index].accept(matrix);
 
         int round = Math.max(1, Math.round(itemStack.getCount() / 21f));
@@ -100,30 +100,32 @@ public class ItemOrientation {
             renderLayer(i, matrix, buffer, light, overlay);
         }
 
-        matrix.pop();
+        matrix.popPose();
     }
 
-    private void renderLayer(int layer, MatrixStack matrix, IRenderTypeBuffer buffer, int light, int overlay) {
-        matrix.push();
+    private void renderLayer(int layer, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+        matrix.pushPose();
 
         matrix.translate(0, height * layer, 0);
-        matrix.rotate(rotation[layer]);
+        matrix.mulPose(rotation[layer]);
 
         renderItem(matrix, buffer, light, overlay);
 
-        matrix.pop();
+        matrix.popPose();
     }
 
-    private void renderItem(MatrixStack matrix, IRenderTypeBuffer buffer, int light, int overlay) {
-        matrix.rotate(HORIZONTAL);
+    private void renderItem(PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+        matrix.mulPose(HORIZONTAL);
         matrix.scale(0.75f, 0.75f, 0.75f);
-        Minecraft.getInstance().getItemRenderer().renderItem(
+        Minecraft.getInstance().getItemRenderer().renderStatic(
                 itemStack,
-                ItemCameraTransforms.TransformType.GROUND,
+                ItemTransforms.TransformType.GROUND,
                 light,
                 overlay,
                 matrix,
-                buffer);
+                buffer,
+                0 // (LivingEntity).getId()
+        );
     }
 
     public boolean isEmpty() {
