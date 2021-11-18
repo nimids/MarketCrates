@@ -22,6 +22,7 @@ public class CrateDataGenerator {
             generator.addProvider(new CrateBlockStates(generator, event.getExistingFileHelper()));
 
             // Items
+            generator.addProvider(new CrateItemModelProvider(generator, event.getExistingFileHelper()));
         }
     }
 }
