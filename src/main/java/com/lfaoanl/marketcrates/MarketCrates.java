@@ -55,7 +55,7 @@ public class MarketCrates {
         if (!DEBUG) {
             return;
         }
-        System.out.println(message);
+        // System.out.println(message);
     }
 
     private static Runnable clientInit() {

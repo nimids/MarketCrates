@@ -48,9 +48,9 @@ public class CrateRecipeProvider extends RecipeProvider {
     }
 
     private Block getBlock(String material, String name) {
-        System.out.println(material + " - " + name);
+        // System.out.println(material + " - " + name);
         String finalName = String.format("%s_%s", material.toUpperCase(), name.toUpperCase());
-        System.out.println(finalName);
+        // System.out.println(finalName);
         try {
             return (Block) Blocks.class.getDeclaredField(finalName).get(facadeBlocks);
         } catch (IllegalAccessException | NoSuchFieldException e) {

@@ -147,7 +147,7 @@ public class CrateBlock extends Block implements SimpleWaterloggedBlock, EntityB
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            System.out.println("onReplaced");
+            // System.out.println("onReplaced");
             BlockEntity tileentity = world.getBlockEntity(pos);
 
             if (tileentity instanceof CrateTileEntity) {

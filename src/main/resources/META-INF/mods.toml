@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[35,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[37,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="Apache-2.0 License"
@@ -41,3 +41,16 @@ Some crates to spice up your towns, markets, fishing docs, you name it!
 Shift click the crate to place stack crates in the same block space.
 Hit the crate with a stick to incline the crate. Hit it once with an axe to retrieve the stick (For creative mode right clicking with a stick toggles it)
 '''
+[[dependencies.marketcrates]] #optional
+   modId="forge" #mandatory
+   mandatory=true #mandatory
+   versionRange="[37,)" #mandatory
+   ordering="NONE"
+   side="BOTH"
+# Here's another dependency
+[[dependencies.marketcrates]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="[1.17.1,)"
+   ordering="NONE"
+   side="BOTH"

@@ -67,8 +67,8 @@ class CrateLootTableProvider implements DataProvider {
                 try {
                     DataProvider.save(GSON, cache, LootTables.serialize(table), out);
                 } catch (IOException e) {
-                    System.out.println("Couldn't save loot table " + out);
-                    System.out.println(Arrays.toString(e.getStackTrace()));
+                    // System.out.println("Couldn't save loot table " + out);
+                    // System.out.println(Arrays.toString(e.getStackTrace()));
                 }
             });
         }

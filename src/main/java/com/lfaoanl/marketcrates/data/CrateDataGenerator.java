@@ -18,7 +18,7 @@ public class CrateDataGenerator {
         }
         if (event.includeClient()) {
             // BlockStates
-            System.out.println("LFAOANL: Data generator");
+            // System.out.println("LFAOANL: Data generator");
             generator.addProvider(new CrateBlockStates(generator, event.getExistingFileHelper()));
 
             // Items

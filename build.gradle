@@ -14,7 +14,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = 'v1.2-universal'
+version = '1.2'
 group = 'com.lfaoanl.marketcrates' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'MarketCrates-1.17.1-37.0.109'
 
@@ -124,7 +124,7 @@ jar {
         attributes([
             "Specification-Title": "marketcrates",
             "Specification-Vendor": "lfaoanl",
-            "Specification-Version": "1.2", // We are version 1 of ourselves
+            "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"lfaoanl",

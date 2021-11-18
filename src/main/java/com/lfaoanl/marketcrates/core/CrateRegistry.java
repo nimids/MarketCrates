@@ -42,7 +42,7 @@ public class CrateRegistry {
     public static void init() {
 
         for (String type : woodTypes) {
-            System.out.println("Register: " + type);
+            // System.out.println("Register: " + type);
             RegistryObject<Block> block = BLOCKS.register(type + "_crate", CrateBlock::new);
             RegistryObject<Item> item = ITEMS.register(type + "_crate", () -> new CrateItem(block.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 

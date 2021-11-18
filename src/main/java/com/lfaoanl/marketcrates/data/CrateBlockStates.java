@@ -24,9 +24,9 @@ public class CrateBlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        System.out.println("Start registering things");
+        // System.out.println("Start registering things");
         for (String material : CrateRegistry.woodTypes) {
-            System.out.println(material);
+            // System.out.println(material);
             Block block = CrateRegistry.blocks.get(material).get();
 
 
