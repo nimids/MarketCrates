@@ -1,20 +1,23 @@
 {
   "schemaVersion": 1,
   "id": "marketcrates",
-  "version": "${version}",
+  "version": "1.3",
 
   "name": "Marketcrates",
-  "description": "",
+  "description": "Some crates to spice up your towns, markets, fishing docs, you name it!\n- Available in all different wood types\n- Shows their inventory contents\n- You can stack them\n- You can put a stick under it to give the crate in incline\nShift click the crate to place stack crates in the same block space.\nHit the crate with a stick to incline the crate. Hit it once with an axe to retrieve the stick (For creative mode right clicking with a stick toggles it)\n",
   "authors": [
     "lfaoanl"
   ],
   "contact": {
     "website": "https://www.curseforge.com/minecraft/mc-mods/market-crates",
-    "repo": "https://github.com/lfaoanl/MarketCrates"
+    "repo": "https://github.com/lfaoanl/MarketCrates",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/market-crates",
+    "sources": "https://github.com/lfaoanl/MarketCrates",
+    "issues": "https://github.com/lfaoanl/MarketCrates/issues"
   },
 
   "license": "Apache-2.0",
-  "icon": "assets/marketcrates-fabric/icon.png",
+  "icon": "marketcrates_logo.png",
 
   "environment": "*",
   "entrypoints": {
@@ -25,10 +28,10 @@
       "com.lfaoanl.marketcrates.MarketCratesFabric"
     ]
   },
-    
+
   "depends": {
     "fabricloader": ">=0.12.5",
-              "fabric": "*",
-          "minecraft": "1.17.1"
+    "fabric": "*",
+    "minecraft": "1.17.1"
   }
 }
