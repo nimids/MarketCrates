@@ -22,7 +22,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.lfaoanl.marketcrates.client.MarketCratesFabricClient"
+      "com.lfaoanl.marketcrates.fabric.client.MarketCratesFabricClient"
     ],
     "main": [
       "com.lfaoanl.marketcrates.fabric.MarketCratesFabric"

@@ -1,5 +1,6 @@
 package com.lfaoanl.marketcrates.fabric.gui;
 
+import com.lfaoanl.marketcrates.common.gui.BaseCrateContainer;
 import com.lfaoanl.marketcrates.fabric.core.CrateRegistry;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

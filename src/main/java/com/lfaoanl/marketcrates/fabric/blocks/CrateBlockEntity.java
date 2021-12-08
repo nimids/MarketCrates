@@ -1,6 +1,7 @@
 package com.lfaoanl.marketcrates.fabric.blocks;
 
 import com.lfaoanl.marketcrates.common.ItemOrientation;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlockEntity;
 import com.lfaoanl.marketcrates.fabric.core.CrateRegistry;
 import com.lfaoanl.marketcrates.fabric.gui.*;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

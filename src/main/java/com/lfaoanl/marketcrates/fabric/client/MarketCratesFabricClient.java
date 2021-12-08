@@ -1,12 +1,12 @@
 package com.lfaoanl.marketcrates.fabric.client;
 
-import com.lfaoanl.marketcrates.fabric.blocks.AbstractCrateBlockEntity;
 import com.lfaoanl.marketcrates.common.ClientProxy;
 import com.lfaoanl.marketcrates.common.MarketCrates;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlockEntity;
+import com.lfaoanl.marketcrates.common.gui.CrateDoubleScreen;
+import com.lfaoanl.marketcrates.common.gui.CrateScreen;
+import com.lfaoanl.marketcrates.common.render.CrateBlockEntityRenderer;
 import com.lfaoanl.marketcrates.fabric.core.CrateRegistry;
-import com.lfaoanl.marketcrates.fabric.gui.CrateDoubleScreen;
-import com.lfaoanl.marketcrates.fabric.gui.CrateScreen;
-import com.lfaoanl.marketcrates.render.CrateBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

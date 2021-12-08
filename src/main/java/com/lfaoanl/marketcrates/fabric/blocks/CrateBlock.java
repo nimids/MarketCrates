@@ -1,5 +1,6 @@
 package com.lfaoanl.marketcrates.fabric.blocks;
 
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;

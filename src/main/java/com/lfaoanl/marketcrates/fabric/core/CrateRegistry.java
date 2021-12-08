@@ -1,27 +1,21 @@
 package com.lfaoanl.marketcrates.fabric.core;
 
-import com.lfaoanl.marketcrates.Ref;
-import com.lfaoanl.marketcrates.fabric.blocks.AbstractCrateBlock;
-import com.lfaoanl.marketcrates.fabric.blocks.AbstractCrateBlockEntity;
+import com.lfaoanl.marketcrates.common.Ref;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlock;
+import com.lfaoanl.marketcrates.common.items.CrateItem;
 import com.lfaoanl.marketcrates.fabric.blocks.CrateBlock;
 import com.lfaoanl.marketcrates.fabric.blocks.CrateBlockEntity;
 import com.lfaoanl.marketcrates.fabric.gui.CrateContainer;
 import com.lfaoanl.marketcrates.fabric.gui.CrateDoubleContainer;
-import com.lfaoanl.marketcrates.items.CrateItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.HashMap;
