@@ -8,11 +8,13 @@ import com.lfaoanl.marketcrates.forge.gui.CrateDoubleContainer;
 import com.lfaoanl.marketcrates.forge.network.CratesPacketHandler;
 import com.lfaoanl.marketcrates.forge.network.packets.CrateItemsPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
 
 public class CrateBlockEntity extends AbstractCrateBlockEntity {
 

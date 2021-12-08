@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 
 java {
     archivesBaseName = project.title + "-forge-" + project.mod_version
-    toolchain.languageVersion = JavaLanguageVersion.of(16)
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
 minecraft {
@@ -161,7 +161,7 @@ jar {
 
 
 tasks.withType(JavaCompile).configureEach {
-    options.release = 16
+    options.release = 17
 }
 
 jar.finalizedBy('reobfJar')
