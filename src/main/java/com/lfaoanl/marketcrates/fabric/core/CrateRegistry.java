@@ -23,19 +23,7 @@ import java.util.HashMap;
 public class CrateRegistry {
     public static final ResourceLocation CRATE_CHANNEL = new ResourceLocation(Ref.MODID, "crate_channel");
 
-//    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, References.MODID);
-//    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, References.MODID);
-//    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, References.MODID);
-//    public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, References.MODID);
-//
-//
-//    public static final RegistryObject<MenuType<CrateContainer>> CONTAINER_CRATE = CONTAINERS.register("crate", () -> IForgeContainerType.create((windowId, inv, data) -> new CrateContainer(windowId, inv)));
-//    public static final RegistryObject<MenuType<CrateDoubleContainer>> CONTAINER_CRATE_DOUBLE = CONTAINERS.register("crate_double", () -> IForgeContainerType.create((windowId, inv, data) -> new CrateDoubleContainer(windowId, inv)));
-
-
     public static String[] woodTypes = new String[]{"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "crimson", "warped"};
-
-//    public static final RegistryObject<BlockEntityType<CrateTileEntity>> CRATE_TILE = TILES.register("crate", () -> BlockEntityType.Builder.of(CrateTileEntity::new, CrateRegistry.validCrates()).build(null));
 
     public static final HashMap<String, Item> items = new HashMap<>();
     public static final HashMap<String, Block> blocks = new HashMap<>();

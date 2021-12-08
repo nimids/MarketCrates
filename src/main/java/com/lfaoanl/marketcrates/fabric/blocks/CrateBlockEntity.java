@@ -25,9 +25,6 @@ public class CrateBlockEntity extends AbstractCrateBlockEntity {
     @Override
     public void sendContents() {
         if (!level.isClientSide()) {
-            // FORGE send packet to client
-//            PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_CHUNK.with(() -> (LevelChunk) this.getLevel().getChunk(this.getBlockPos()));
-//            CratesPacketHandler.INSTANCE.send(target, new CrateItemsPacket(this.getBlockPos(), ItemOrientation.toItemStack(stacks)));
 
             FriendlyByteBuf data = PacketByteBufs.create();
             BlockPos blockPos = this.getBlockPos();
