@@ -1,6 +1,5 @@
 package com.lfaoanl.marketcrates.common;
 
-import com.lfaoanl.marketcrates.Ref;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

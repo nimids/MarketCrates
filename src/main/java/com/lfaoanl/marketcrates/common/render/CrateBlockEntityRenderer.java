@@ -1,8 +1,8 @@
-package com.lfaoanl.marketcrates.render;
+package com.lfaoanl.marketcrates.common.render;
 
-import com.lfaoanl.marketcrates.blocks.AbstractCrateBlock;
-import com.lfaoanl.marketcrates.blocks.AbstractCrateBlockEntity;
-import com.lfaoanl.marketcrates.blocks.states.CrateType;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlock;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlockEntity;
+import com.lfaoanl.marketcrates.common.blocks.states.CrateType;
 import com.lfaoanl.marketcrates.common.ItemOrientation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;

@@ -1,4 +1,4 @@
-package com.lfaoanl.marketcrates.blocks;
+package com.lfaoanl.marketcrates.common.blocks;
 
 import com.lfaoanl.marketcrates.common.ItemOrientation;
 import com.lfaoanl.marketcrates.common.MarketCrates;

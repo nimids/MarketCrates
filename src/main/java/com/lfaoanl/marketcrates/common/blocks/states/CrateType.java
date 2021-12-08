@@ -1,4 +1,4 @@
-package com.lfaoanl.marketcrates.blocks.states;
+package com.lfaoanl.marketcrates.common.blocks.states;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.util.StringRepresentable;

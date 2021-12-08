@@ -1,4 +1,4 @@
-package com.lfaoanl.marketcrates;
+package com.lfaoanl.marketcrates.common;
 
 public class Ref {
 

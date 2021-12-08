@@ -1,6 +1,6 @@
-package com.lfaoanl.marketcrates.gui;
+package com.lfaoanl.marketcrates.common.gui;
 
-import com.lfaoanl.marketcrates.Ref;
+import com.lfaoanl.marketcrates.common.Ref;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;

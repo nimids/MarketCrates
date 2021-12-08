@@ -1,4 +1,4 @@
-package com.lfaoanl.marketcrates.gui;
+package com.lfaoanl.marketcrates.common.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;

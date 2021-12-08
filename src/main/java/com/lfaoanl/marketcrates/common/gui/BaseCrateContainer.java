@@ -1,4 +1,4 @@
-package com.lfaoanl.marketcrates.gui;
+package com.lfaoanl.marketcrates.common.gui;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;

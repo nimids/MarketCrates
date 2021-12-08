@@ -1,7 +1,7 @@
-package com.lfaoanl.marketcrates.blocks;
+package com.lfaoanl.marketcrates.common.blocks;
 
-import com.lfaoanl.marketcrates.blocks.states.CrateType;
-import com.lfaoanl.marketcrates.blocks.states.CrateTypeProperty;
+import com.lfaoanl.marketcrates.common.blocks.states.CrateType;
+import com.lfaoanl.marketcrates.common.blocks.states.CrateTypeProperty;
 import com.lfaoanl.marketcrates.common.ItemOrientation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

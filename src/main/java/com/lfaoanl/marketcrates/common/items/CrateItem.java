@@ -1,6 +1,6 @@
-package com.lfaoanl.marketcrates.items;
+package com.lfaoanl.marketcrates.common.items;
 
-import com.lfaoanl.marketcrates.blocks.AbstractCrateBlock;
+import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
