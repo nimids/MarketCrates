@@ -3,7 +3,6 @@ package com.lfaoanl.marketcrates.common.items;
 import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlock;
 import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlockEntity;
 import com.lfaoanl.marketcrates.common.blocks.states.CrateType;
-import com.lfaoanl.marketcrates.fabric.blocks.CrateBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
@@ -33,11 +32,11 @@ public class CrateItem extends BlockItem {
             // If the TileEntity is not already a double crate
             BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof AbstractCrateBlockEntity && !((AbstractCrateBlockEntity) tileEntity).isDoubleCrate()) {
-                BlockState newState = tileEntity.getBlockState().setValue(CrateBlock.TYPE, CrateType.DOUBLE);
+                BlockState newState = tileEntity.getBlockState().setValue(AbstractCrateBlock.TYPE, CrateType.DOUBLE);
                 Player player = context.getPlayer();
 
                 world.setBlock(pos, newState, 2);
-                ((CrateBlock) tileEntity.getBlockState().getBlock()).playSound(world, pos, player, SoundEvents.WOOD_PLACE);
+                ((AbstractCrateBlock) tileEntity.getBlockState().getBlock()).playSound(world, pos, player, SoundEvents.WOOD_PLACE);
 
                 if (!player.isCreative()) {
                     context.getItemInHand().setCount(context.getItemInHand().getCount() - 1);
