@@ -1,9 +1,8 @@
 package com.lfaoanl.marketcrates.common.gui;
 
-import com.lfaoanl.marketcrates.common.MarketCrates;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
@@ -15,7 +14,7 @@ public abstract class BaseCrateContainer extends AbstractContainerMenu {
     protected final Container inventory;
     private final int size;
 
-    public BaseCrateContainer(int id, Inventory playerInventory, Container inventory, int size, MenuType<?extends BaseCrateContainer> containerType, boolean isDouble) {
+    public BaseCrateContainer(int id, Inventory playerInventory, Container inventory, int size, MenuType<? extends BaseCrateContainer> containerType, boolean isDouble) {
         super(containerType, id);
 
         if (isDouble) {
@@ -87,7 +86,7 @@ public abstract class BaseCrateContainer extends AbstractContainerMenu {
     @Override
     public ItemStack quickMoveStack(Player player, int i) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.slots.get(i);
+        Slot slot = (Slot) this.slots.get(i);
         if (slot != null && slot.hasItem()) {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
