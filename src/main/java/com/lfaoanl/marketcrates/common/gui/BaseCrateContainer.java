@@ -1,5 +1,6 @@
 package com.lfaoanl.marketcrates.common.gui;
 
+import com.lfaoanl.marketcrates.common.MarketCrates;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
@@ -83,47 +84,27 @@ public abstract class BaseCrateContainer extends AbstractContainerMenu {
      * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player
      * inventory and the other inventory(s).
      */
-    public ItemStack quickMoveStack(Player playerIn, int slotIndex) {
-
-        // Init empty itemstack
-        ItemStack copyStack = ItemStack.EMPTY;
-
-        // Get significant slot
-        Slot slot = this.slots.get(slotIndex);
-
-        // If slot has stuff
+    @Override
+    public ItemStack quickMoveStack(Player player, int i) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = (Slot)this.slots.get(i);
         if (slot != null && slot.hasItem()) {
-
-            // Get stuff from slot
-            ItemStack stackFromSlot = slot.getItem();
-            copyStack = stackFromSlot.copy();
-
-
-            int playerInventorySize = this.slots.size() - size;
-            if (slotIndex >= playerInventorySize) {
-
-                // If slot is changed
-                if (!this.moveItemStackTo(stackFromSlot, 0, playerInventorySize, true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.moveItemStackTo(stackFromSlot, playerInventorySize, this.slots.size(), false)) {
+            ItemStack itemStack2 = slot.getItem();
+            itemStack = itemStack2.copy();
+            if (i < size ? !this.moveItemStackTo(itemStack2, size, 36 + size, true) : !this.moveItemStackTo(itemStack2, 0, size, false)) {
                 return ItemStack.EMPTY;
             }
-
-            if (stackFromSlot.isEmpty()) {
+            if (itemStack2.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
-
-            if (stackFromSlot.getCount() == copyStack.getCount()) {
+            if (itemStack2.getCount() == itemStack.getCount()) {
                 return ItemStack.EMPTY;
             }
-
-            slot.onTake(playerIn, stackFromSlot);
+            slot.onTake(player, itemStack2);
         }
-
-        return copyStack;
+        return itemStack;
     }
 
     /**
