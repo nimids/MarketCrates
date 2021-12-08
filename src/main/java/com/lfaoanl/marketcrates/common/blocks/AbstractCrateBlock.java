@@ -1,8 +1,8 @@
 package com.lfaoanl.marketcrates.common.blocks;
 
+import com.lfaoanl.marketcrates.common.ItemOrientation;
 import com.lfaoanl.marketcrates.common.blocks.states.CrateType;
 import com.lfaoanl.marketcrates.common.blocks.states.CrateTypeProperty;
-import com.lfaoanl.marketcrates.common.ItemOrientation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
@@ -77,7 +76,7 @@ public abstract class AbstractCrateBlock extends BaseEntityBlock implements Simp
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
-            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
         return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);

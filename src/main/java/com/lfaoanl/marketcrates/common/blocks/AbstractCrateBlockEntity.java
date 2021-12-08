@@ -8,9 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class AbstractCrateBlockEntity extends BaseContainerBlockEntity {
 
-    //    private NonNullList<ItemStack> stacks = NonNullList.withSize(6, ItemStack.EMPTY);
     protected NonNullList<ItemOrientation> stacks = NonNullList.withSize(12, ItemOrientation.EMPTY);
 
     private boolean isDouble = false;
@@ -117,12 +114,9 @@ public abstract class AbstractCrateBlockEntity extends BaseContainerBlockEntity 
         return ItemOrientation.toItemOrientation(items);
     }
 
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
-
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         ContainerHelper.saveAllItems(compound, ItemOrientation.toItemStack(this.stacks));
-
-        return compound;
     }
 
     public void receiveContents(NonNullList<ItemStack> stacks) {
