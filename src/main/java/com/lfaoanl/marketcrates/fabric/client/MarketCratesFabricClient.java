@@ -11,7 +11,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -29,7 +29,7 @@ public class MarketCratesFabricClient extends ClientProxy implements ClientModIn
         ScreenRegistry.register(CrateRegistry.CRATE_SCREEN, CrateScreen::new);
         ScreenRegistry.register(CrateRegistry.CRATE_DOUBLE_SCREEN, CrateDoubleScreen::new);
 
-        BlockEntityRendererRegistry.INSTANCE.register(CrateRegistry.CRATE_BLOCK_ENTITY, CrateBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(CrateRegistry.CRATE_BLOCK_ENTITY, CrateBlockEntityRenderer::new);
 
         registerClientPacketReceiver();
     }
