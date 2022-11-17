@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class CrateRegistry {
     public static final ResourceLocation CRATE_CHANNEL = new ResourceLocation(Ref.MODID, "crate_channel");
 
-    public static String[] woodTypes = new String[]{"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "crimson", "warped"};
+    public static String[] woodTypes = new String[]{"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "crimson", "warped"};
 
     public static final HashMap<String, Item> items = new HashMap<>();
     public static final HashMap<String, Block> blocks = new HashMap<>();
