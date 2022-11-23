@@ -24,21 +24,21 @@ public class CrateRecipeProvider extends RecipeProvider {
     @Override
     @SuppressWarnings("ConstantConditions")
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-
-        for (String material : CrateRegistry.woodTypes) {
-            RegistryObject<Block> registry = CrateRegistry.blocks.get(material);
-            Block block = registry.get();
-
-            ShapedRecipeBuilder.shaped(block)
-                    .pattern("FFF")
-                    .pattern("SSS")
-                    .define('F', getBlock(material, "fence"))
-                    .define('S', getBlock(material, "slab"))
-                    .group(Ref.MODID)
-                    .unlockedBy("has_wood_slab", has(getBlock(material, "slab")))
-                    .save(consumer, resourceLocation(registry.getId()));
-
-        }
+//
+//        for (String material : CrateRegistry.woodTypes) {
+//            RegistryObject<Block> registry = CrateRegistry.blocks.get(material);
+//            Block block = registry.get();
+//
+//            ShapedRecipeBuilder.shaped(block)
+//                    .pattern("FFF")
+//                    .pattern("SSS")
+//                    .define('F', getBlock(material, "fence"))
+//                    .define('S', getBlock(material, "slab"))
+//                    .group(Ref.MODID)
+//                    .unlockedBy("has_wood_slab", has(getBlock(material, "slab")))
+//                    .save(consumer, resourceLocation(registry.getId()));
+//
+//        }
 
     }
 

@@ -1,14 +1,36 @@
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
+        maven {
+            url = 'https://maven.minecraftforge.net'
+        }
+
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
 apply plugin: 'net.minecraftforge.gradle'
+
+
+
+configurations {
+    shade
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate 'com.tterrag.registrate', 'com.mymod.repack.registrate'
+}
+
+reobf {
+    shadowJar {}
+}
 
 java {
     archivesBaseName = project.title + "-forge-" + project.mod_version
@@ -110,7 +132,6 @@ sourceSets.main.resources {
 }
 
 
-
 repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
@@ -119,6 +140,11 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+    }
+    mavenLocal()
 }
 
 dependencies {
@@ -139,7 +165,9 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    def registrate = "com.tterrag.registrate:Registrate:${registrate_version}"
+    implementation fg.deobf(registrate)
+    shade registrate
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -159,10 +187,12 @@ jar {
 }
 
 
-
 tasks.withType(JavaCompile).configureEach {
     options.release = 17
 }
 
 jar.finalizedBy('reobfJar')
+
+build.dependsOn shadowJar
+build.dependsOn reobfShadowJar
 

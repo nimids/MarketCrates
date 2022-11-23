@@ -38,11 +38,11 @@ class CrateLootTableProvider implements DataProvider {
 
 
     protected void createLootTables() {
-        for (String material : CrateRegistry.woodTypes) {
-            Block block = CrateRegistry.blocks.get(material).get();
-
-            registerSelfDrop(block);
-        }
+//        for (String material : CrateRegistry.woodTypes) {
+//            Block block = CrateRegistry.blocks.get(material).get();
+//
+//            registerSelfDrop(block);
+//        }
     }
 
 

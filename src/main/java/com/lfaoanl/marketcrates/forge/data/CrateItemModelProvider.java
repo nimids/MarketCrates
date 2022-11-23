@@ -18,19 +18,19 @@ public class CrateItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (String material : CrateRegistry.woodTypes) {
-            // System.out.println(material);
-            Item crateItem = CrateRegistry.items.get(material).get();
-            ResourceLocation resourceLocation = crateItem.getRegistryName();
-
-            getBuilder(resourceLocation.getPath())
-                    .parent(new ModelFile.UncheckedModelFile("block/block"))
-                    .texture("particle", "minecraft:block/" + material + "_planks")
-                    .texture("material", "minecraft:block/" + material + "_planks")
-
-                    .element()
-                    .from(0, 0, 0)
-                    .to(16, 16, 16);
-        }
+//        for (String material : CrateRegistry.woodTypes) {
+//            // System.out.println(material);
+//            Item crateItem = CrateRegistry.items.get(material).get();
+//            ResourceLocation resourceLocation = crateItem.getRegistryName();
+//
+//            getBuilder(resourceLocation.getPath())
+//                    .parent(new ModelFile.UncheckedModelFile("block/block"))
+//                    .texture("particle", "minecraft:block/" + material + "_planks")
+//                    .texture("material", "minecraft:block/" + material + "_planks")
+//
+//                    .element()
+//                    .from(0, 0, 0)
+//                    .to(16, 16, 16);
+//        }
     }
 }

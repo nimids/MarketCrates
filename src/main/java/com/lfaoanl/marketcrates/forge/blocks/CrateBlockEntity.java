@@ -12,14 +12,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.network.PacketDistributor;
 
 public class CrateBlockEntity extends AbstractCrateBlockEntity {
 
-    public CrateBlockEntity(BlockPos pos, BlockState state) {
-        super(CrateRegistry.CRATE_TILE.get(), pos, state);
+    public CrateBlockEntity(BlockEntityType<? extends CrateBlockEntity> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
@@ -35,8 +36,8 @@ public class CrateBlockEntity extends AbstractCrateBlockEntity {
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
         //TODO Make CrateDoubleContainer to include isDoubleCrate as parameter maybe the abstract classes not needed anymore
         if (isDoubleCrate()) {
-            return new CrateDoubleContainer(id, player, this);
+            return new CrateDoubleContainer(id, player, this, CrateRegistry.CONTAINER_CRATE_DOUBLE.get());
         }
-        return new CrateContainer(id, player, this);
+        return new CrateContainer(id, player, this, CrateRegistry.CONTAINER_CRATE.get());
     }
 }

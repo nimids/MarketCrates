@@ -13,11 +13,11 @@ public class ForgeClientProxy extends ClientProxy {
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static void init(final FMLClientSetupEvent event) {
 
-        MenuScreens.register(CrateRegistry.CONTAINER_CRATE.get(), CrateScreen::new);
-        MenuScreens.register(CrateRegistry.CONTAINER_CRATE_DOUBLE.get(), CrateDoubleScreen::new);
+//        MenuScreens.register(CrateRegistry.CONTAINER_CRATE.get(), CrateScreen::new);
+//        MenuScreens.register(CrateRegistry.CONTAINER_CRATE_DOUBLE.get(), CrateDoubleScreen::new);
     }
 
     public void registerBlockEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(CrateRegistry.CRATE_TILE.get(), CrateBlockEntityRenderer::new);
+//        event.registerBlockEntityRenderer(CrateRegistry.CRATE_TILE.get(), CrateBlockEntityRenderer::new);
     }
 }

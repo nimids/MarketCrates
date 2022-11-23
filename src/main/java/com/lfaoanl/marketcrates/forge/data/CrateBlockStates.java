@@ -24,28 +24,28 @@ public class CrateBlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        // System.out.println("Start registering things");
-        for (String material : CrateRegistry.woodTypes) {
-            // System.out.println(material);
-            Block block = CrateRegistry.blocks.get(material).get();
-
-
-            simpleBlockItem(block, getModel(block, material, CrateType.DEFAULT).model);
-            VariantBlockStateBuilder builder = getVariantBuilder(block);
-
-            for (CrateType crateType : CrateType.all()) {
-                for (Map.Entry<Direction, Number> entry : getRotations().entrySet()) {
-                    builder.partialState()
-                            .with(CrateBlock.TYPE, crateType)
-                            .with(CrateBlock.FACING, entry.getKey())
-                            .modelForState()
-                            .modelFile(getModel(block, material, crateType).model)
-                            .rotationY((int) entry.getValue())
-                            .addModel();
-
-                }
-            }
-        }
+//        // System.out.println("Start registering things");
+//        for (String material : CrateRegistry.woodTypes) {
+//            // System.out.println(material);
+//            Block block = CrateRegistry.blocks.get(material).get();
+//
+//
+//            simpleBlockItem(block, getModel(block, material, CrateType.DEFAULT).model);
+//            VariantBlockStateBuilder builder = getVariantBuilder(block);
+//
+//            for (CrateType crateType : CrateType.all()) {
+//                for (Map.Entry<Direction, Number> entry : getRotations().entrySet()) {
+//                    builder.partialState()
+//                            .with(CrateBlock.TYPE, crateType)
+//                            .with(CrateBlock.FACING, entry.getKey())
+//                            .modelForState()
+//                            .modelFile(getModel(block, material, crateType).model)
+//                            .rotationY((int) entry.getValue())
+//                            .addModel();
+//
+//                }
+//            }
+//        }
     }
 
     private ConfiguredModel getModel(Block block, String woodType, CrateType crateType) {

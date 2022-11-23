@@ -53,8 +53,8 @@ public abstract class AbstractCrateBlock extends BaseEntityBlock implements Simp
 
     private NonNullList<ItemOrientation> oldItems;
 
-    public AbstractCrateBlock() {
-        super(properties);
+    public AbstractCrateBlock(Properties props) {
+        super(props);
 
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
