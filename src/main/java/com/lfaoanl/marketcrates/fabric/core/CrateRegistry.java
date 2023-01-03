@@ -7,13 +7,13 @@ import com.lfaoanl.marketcrates.fabric.blocks.CrateBlock;
 import com.lfaoanl.marketcrates.fabric.blocks.CrateBlockEntity;
 import com.lfaoanl.marketcrates.fabric.gui.CrateContainer;
 import com.lfaoanl.marketcrates.fabric.gui.CrateDoubleContainer;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -37,11 +37,12 @@ public class CrateRegistry {
         for (String type : woodTypes) {
             AbstractCrateBlock block = new CrateBlock();
             blocks.put(type, block);
-            items.put(type, new CrateItem(block, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+            items.put(type, new CrateItem(block, new Item.Properties()));
         }
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> items.values().forEach(content::accept));
 
-        CRATE_DOUBLE_SCREEN = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Ref.MODID, "crate_double"), CrateDoubleContainer::new);
-        CRATE_SCREEN = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Ref.MODID, "crate"), CrateContainer::new);
+        CRATE_DOUBLE_SCREEN = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Ref.MODID, "crate_double"), new MenuType<>(CrateDoubleContainer::new));
+        CRATE_SCREEN = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(Ref.MODID, "crate"), new MenuType<>(CrateContainer::new));
 
     }
 
@@ -49,16 +50,16 @@ public class CrateRegistry {
 
         for (String type : woodTypes) {
             ResourceLocation resourceLocation = new ResourceLocation(Ref.MODID, type + "_crate");
-            Registry.register(Registry.BLOCK, resourceLocation, blocks.get(type));
-            Registry.register(Registry.ITEM, resourceLocation, items.get(type));
+            Registry.register(BuiltInRegistries.BLOCK, resourceLocation, blocks.get(type));
+            Registry.register(BuiltInRegistries.ITEM, resourceLocation, items.get(type));
         }
 
         ResourceLocation rlCrateBlockEntity = new ResourceLocation(Ref.MODID, "crate");
 
-        Block[] blocksArray = blocks.values().toArray(new Block[blocks.size()]);
+        Block[] blocksArray = blocks.values().toArray(new Block[0]);
 
         BlockEntityType<CrateBlockEntity> beBuilder = FabricBlockEntityTypeBuilder.create(CrateBlockEntity::new, blocksArray).build(null);
-        CRATE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, rlCrateBlockEntity, beBuilder);
+        CRATE_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, rlCrateBlockEntity, beBuilder);
     }
 
 }

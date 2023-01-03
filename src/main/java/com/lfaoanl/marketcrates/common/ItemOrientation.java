@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.NonNullList;
-import com.mojang.math.Quaternion;
+import org.joml.Quaternionf;
 
 import java.util.Random;
 import java.util.function.Consumer;
@@ -17,12 +17,12 @@ public class ItemOrientation {
     private final ItemStack itemStack;
 
     private final float height;
-    private final Quaternion[] rotation = new Quaternion[3];
+    private final Quaternionf[] rotation = new Quaternionf[3];
 
 
     public static final ItemOrientation EMPTY = new ItemOrientation(ItemStack.EMPTY);
 
-    private static Quaternion HORIZONTAL;
+    private static Quaternionf HORIZONTAL;
 
     private boolean hasOrientations = false;
 
@@ -55,11 +55,11 @@ public class ItemOrientation {
 
         int lowIncline = -10;
         int incline = 25;
-        rotation[0] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
-        rotation[1] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
-        rotation[2] = new Quaternion(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
+        rotation[0] = MarketCrates.QuaternionHelper(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
+        rotation[1] = MarketCrates.QuaternionHelper(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
+        rotation[2] = MarketCrates.QuaternionHelper(randomInt(lowIncline, incline), randomInt(45), randomInt(incline), true);
 
-        HORIZONTAL = new Quaternion(85, 0, 0, true);
+        HORIZONTAL = MarketCrates.QuaternionHelper(85, 0, 0, true);
 
         hasOrientations = true;
 

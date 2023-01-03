@@ -5,20 +5,21 @@ import com.lfaoanl.marketcrates.common.blocks.AbstractCrateBlockEntity;
 import com.lfaoanl.marketcrates.common.blocks.states.CrateType;
 import com.lfaoanl.marketcrates.common.ItemOrientation;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Quaternionf;
 
 public class CrateBlockEntityRenderer<H extends AbstractCrateBlockEntity> implements BlockEntityRenderer<H> {
 
-    private final Quaternion SOUTH = new Quaternion(0, 180, 0, true);
-    private final Quaternion EAST = new Quaternion(0, 270, 0, true);
-    private final Quaternion WEST = new Quaternion(0, 90, 0, true);
-    private final Quaternion INCLINED = new Quaternion(-22.5f, 0, 0, true);
+    private final Quaternionf SOUTH = new Quaternionf(0, 1, 0, 0);
+    private final Quaternionf EAST = new Quaternionf(0, 1/Math.sqrt(2), 0, -1/Math.sqrt(2));
+    private final Quaternionf WEST = new Quaternionf(0, 1/Math.sqrt(2), 0, 1/Math.sqrt(2));
+    private final double INCLINE_ANGLE = -22.5f * Math.PI / 180;
+    private final Quaternionf INCLINED = new Quaternionf(Math.sin(INCLINE_ANGLE/2), 0, 0, Math.cos(INCLINE_ANGLE/2));
 
     public CrateBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
